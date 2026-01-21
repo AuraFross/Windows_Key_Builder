@@ -20,5 +20,9 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
+# Create a non-root user
+RUN adduser --disabled-password --gecos "" appuser && chown -R appuser /app
+USER appuser
+
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Windows_Key_Builder.Web.dll"]

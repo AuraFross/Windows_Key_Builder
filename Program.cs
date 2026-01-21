@@ -3,6 +3,12 @@ using Windows_Key_Builder.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Security: Remove Server header
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.AddServerHeader = false;
+});
+
 // Add services to the container
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
