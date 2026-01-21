@@ -12,7 +12,7 @@ services:
     #   dockerfile: Dockerfile
 
     ports:
-      - "127.0.0.1:5001:8082"
+      - "8082:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:8080

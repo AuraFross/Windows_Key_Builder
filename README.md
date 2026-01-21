@@ -22,7 +22,7 @@ A Blazor Server web application for generating Windows `autounattend.xml` files.
    docker-compose up -d --build
    ```
 
-2. Access the application at `http://localhost:8082` (or the port defined in docker-compose.yml).
+2. Access the application at `http://localhost:8082` or `http://<server-ip>:8082` (or the port defined in docker-compose.yml).
 
 ### Local Development
 
