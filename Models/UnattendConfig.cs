@@ -33,6 +33,7 @@ namespace Windows_Key_Builder.Web.Models
         public bool UseKMSKey { get; set; }
 
         // System Tweaks
+        public bool BypassTPM { get; set; }
         public bool SetUACNeverNotify { get; set; }
         public bool ShowFileExtensions { get; set; } = true;
         public bool EnableRDP { get; set; }

@@ -25,6 +25,42 @@ namespace Windows_Key_Builder.Web.Services
         {
             sb.AppendLine("    <settings pass=\"windowsPE\">");
 
+            if (config.BypassTPM)
+            {
+                sb.AppendLine("        <component name=\"Microsoft-Windows-Setup\" processorArchitecture=\"amd64\" publicKeyToken=\"31bf3856ad364e35\" language=\"neutral\" versionScope=\"nonSxS\">");
+                sb.AppendLine("            <RunSynchronous>");
+
+                int order = 1;
+
+                sb.AppendLine($"                <RunSynchronousCommand wcm:action=\"add\">");
+                sb.AppendLine($"                    <Order>{order++}</Order>");
+                sb.AppendLine("                    <Path>reg add \"HKLM\\SYSTEM\\Setup\\LabConfig\" /v BypassTPMCheck /t REG_DWORD /d 1 /f</Path>");
+                sb.AppendLine("                </RunSynchronousCommand>");
+
+                sb.AppendLine($"                <RunSynchronousCommand wcm:action=\"add\">");
+                sb.AppendLine($"                    <Order>{order++}</Order>");
+                sb.AppendLine("                    <Path>reg add \"HKLM\\SYSTEM\\Setup\\LabConfig\" /v BypassSecureBootCheck /t REG_DWORD /d 1 /f</Path>");
+                sb.AppendLine("                </RunSynchronousCommand>");
+
+                sb.AppendLine($"                <RunSynchronousCommand wcm:action=\"add\">");
+                sb.AppendLine($"                    <Order>{order++}</Order>");
+                sb.AppendLine("                    <Path>reg add \"HKLM\\SYSTEM\\Setup\\LabConfig\" /v BypassRAMCheck /t REG_DWORD /d 1 /f</Path>");
+                sb.AppendLine("                </RunSynchronousCommand>");
+
+                sb.AppendLine($"                <RunSynchronousCommand wcm:action=\"add\">");
+                sb.AppendLine($"                    <Order>{order++}</Order>");
+                sb.AppendLine("                    <Path>reg add \"HKLM\\SYSTEM\\Setup\\LabConfig\" /v BypassStorageCheck /t REG_DWORD /d 1 /f</Path>");
+                sb.AppendLine("                </RunSynchronousCommand>");
+
+                sb.AppendLine($"                <RunSynchronousCommand wcm:action=\"add\">");
+                sb.AppendLine($"                    <Order>{order++}</Order>");
+                sb.AppendLine("                    <Path>reg add \"HKLM\\SYSTEM\\Setup\\LabConfig\" /v BypassCPUCheck /t REG_DWORD /d 1 /f</Path>");
+                sb.AppendLine("                </RunSynchronousCommand>");
+
+                sb.AppendLine("            </RunSynchronous>");
+                sb.AppendLine("        </component>");
+            }
+
             sb.AppendLine("        <component name=\"Microsoft-Windows-International-Core-WinPE\" processorArchitecture=\"amd64\" publicKeyToken=\"31bf3856ad364e35\" language=\"neutral\" versionScope=\"nonSxS\">");
             sb.AppendLine($"            <SetupUILanguage><UILanguage>{config.Language}</UILanguage></SetupUILanguage>");
             sb.AppendLine($"            <InputLocale>{config.Keyboard}</InputLocale>");

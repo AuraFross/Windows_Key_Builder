@@ -4,6 +4,19 @@
     <MudItem xs="12" md="6">
         <MudStack Spacing="2">
             <MudCheckBox T="bool"
+                         Checked="ConfigService.Config.BypassTPM"
+                         CheckedChanged="@((bool v) => ConfigService.Config.BypassTPM = v)"
+                         Label="Bypass TPM 2.0 & RAM Checks"
+                         Color="Color.Primary" />
+            <MudText Typo="Typo.caption" Color="Color.Secondary" Class="ml-8">
+                Allows installing Windows 11 on unsupported hardware.
+            </MudText>
+        </MudStack>
+    </MudItem>
+
+    <MudItem xs="12" md="6">
+        <MudStack Spacing="2">
+            <MudCheckBox T="bool"
                          Checked="ConfigService.Config.SetUACNeverNotify"
                          CheckedChanged="@((bool v) => ConfigService.Config.SetUACNeverNotify = v)"
                          Label="Set UAC to Never Notify"
